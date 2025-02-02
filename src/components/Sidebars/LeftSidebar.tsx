@@ -1,4 +1,5 @@
 import { menuList } from "@/constants";
+import Image from "next/image";
 import Link from "next/link";
 
 
@@ -19,12 +20,12 @@ const LeftSidebar = () => {
                             className="p-2 rounded-full hover:bg-[#181818] flex items-center gap-4"
                             key={item.id}
                         >
-                            {/* <Image
-                                path={`icons/${item.icon}`}
+                            <Image
+                                src={`icons/${item.icon}`}
                                 alt={item.name}
-                                w={24}
-                                h={24}
-                            /> */}
+                                width={24}
+                                height={24}
+                            />
                             <span className="hidden xxl:inline">{item.name}</span>
                         </Link>
                     ))}
@@ -34,7 +35,7 @@ const LeftSidebar = () => {
                     href="/compose/post"
                     className="bg-white text-black rounded-full w-12 h-12 flex items-center justify-center xxl:hidden"
                 >
-                    {/* <Image path="icons/post.svg" alt="new post" w={24} h={24} /> */}
+                    <Image src="icons/post.svg" alt="new post" width={24} height={24} />
                 </Link>
                 <Link
                     href="/compose/post"
@@ -47,7 +48,7 @@ const LeftSidebar = () => {
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                     <div className="w-10 h-10 relative rounded-full overflow-hidden">
-                        {/* <Image path="/general/avatar.png" alt="lama dev" w={100} h={100} tr={true} /> */}
+                        <Image src="/general/avatar.png" alt="lama dev" width={100} height={100}  />
                     </div>
                     <div className="hidden xxl:flex flex-col">
                         <span className="font-bold">Lama Dev</span>
