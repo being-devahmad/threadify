@@ -1,6 +1,6 @@
 import { menuList } from "@/constants";
-import Image from "next/image";
 import Link from "next/link";
+import { Image } from "../Image";
 
 
 const LeftSidebar = () => {
@@ -10,7 +10,7 @@ const LeftSidebar = () => {
             <div className="flex flex-col gap-4 text-lg items-center xxl:items-start">
                 {/* LOGO */}
                 <Link href="/" className="p-2 rounded-full hover:bg-[#181818] ">
-                    {/* <Image path="icons/logo.svg" alt="logo" w={24} h={24} /> */}
+                    <Image path="icons/logo.svg" alt="logo" width={24} height={24} />
                 </Link>
                 {/* MENU LIST */}
                 <div className="flex flex-col gap-4">
@@ -21,7 +21,7 @@ const LeftSidebar = () => {
                             key={item.id}
                         >
                             <Image
-                                src={`icons/${item.icon}`}
+                                path={`icons/${item.icon}`}
                                 alt={item.name}
                                 width={24}
                                 height={24}
@@ -35,7 +35,7 @@ const LeftSidebar = () => {
                     href="/compose/post"
                     className="bg-white text-black rounded-full w-12 h-12 flex items-center justify-center xxl:hidden"
                 >
-                    <Image src="icons/post.svg" alt="new post" width={24} height={24} />
+                    <Image path="icons/post.svg" alt="new post" width={24} height={24} />
                 </Link>
                 <Link
                     href="/compose/post"
@@ -48,7 +48,7 @@ const LeftSidebar = () => {
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                     <div className="w-10 h-10 relative rounded-full overflow-hidden">
-                        <Image src="/general/avatar.png" alt="lama dev" width={100} height={100}  />
+                        <Image path="/general/avatar.png" alt="lama dev" width={100} height={100} tr={true} />
                     </div>
                     <div className="hidden xxl:flex flex-col">
                         <span className="font-bold">Lama Dev</span>

@@ -1,6 +1,6 @@
-import Image from "next/image";
+
 import Link from "next/link";
-// import Image from "./Image";
+import { Image } from "./Image";
 
 const Recommendations = () => {
     return (
@@ -10,7 +10,7 @@ const Recommendations = () => {
                 {/* IMAGE AND USER INFO */}
                 <div className='flex items-center gap-2'>
                     <div className='relative rounded-full overflow-hidden w-10 h-10'>
-                        {/* <Image src="general/avatar.png" alt="John Doe" width={100} height={100}  /> */}
+                        <Image path="general/avatar.png" alt="John Doe" width={100} height={100}  />
                     </div>
                     <div className=''>
                         <h1 className="text-md font-bold">John Doe</h1>
@@ -24,7 +24,7 @@ const Recommendations = () => {
                 {/* IMAGE AND USER INFO */}
                 <div className='flex items-center gap-2'>
                     <div className='relative rounded-full overflow-hidden w-10 h-10'>
-                        {/* <Image src="general/avatar.png" alt="John Doe" width={100} height={100}  /> */}
+                        <Image path="general/avatar.png" alt="John Doe" width={100} height={100}  />
                     </div>
                     <div className=''>
                         <h1 className="text-md font-bold">John Doe</h1>
@@ -38,7 +38,7 @@ const Recommendations = () => {
                 {/* IMAGE AND USER INFO */}
                 <div className='flex items-center gap-2'>
                     <div className='relative rounded-full overflow-hidden w-10 h-10'>
-                        {/* <Image src="general/avatar.png" alt="John Doe" width={100} height={100}  /> */}
+                        <Image path="general/avatar.png" alt="John Doe" width={100} height={100}  />
                     </div>
                     <div className=''>
                         <h1 className="text-md font-bold">John Doe</h1>

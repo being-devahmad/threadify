@@ -1,6 +1,6 @@
-import Image from "next/image";
+
 import Link from "next/link";
-// import Image from "./Image";
+import { Image } from "./Image";
 
 const PopularTags = () => {
     return (
@@ -11,12 +11,12 @@ const PopularTags = () => {
             {/* TREND EVENT */}
             <div className="flex gap-4">
                 <div className="relative w-20 h-20 rounded-xl overflow-hidden">
-                    {/* <Image
-                        src="general/event.png"
+                    <Image
+                        path="general/avatar.png"
                         alt="event"
                         width={120}
                         height={120}
-                    /> */}
+                    />
                 </div>
                 <div className="flex-1">
                     <h2 className="font-bold text-textGrayLight">
@@ -29,7 +29,7 @@ const PopularTags = () => {
             <div className="">
                 <div className="flex items-center justify-between">
                     <span className="text-textGray text-sm">Technology • Trending</span>
-                    <Image src="icons/infoMore.svg" alt="info" width={16} height={16} />
+                    <Image path="icons/infoMore.svg" alt="info" width={16} height={16} />
                 </div>
                 <h2 className="text-textGrayLight font-bold">OpenAI</h2>
                 <span className="text-textGray text-sm">20K posts</span>
@@ -38,7 +38,7 @@ const PopularTags = () => {
             <div className="">
                 <div className="flex items-center justify-between">
                     <span className="text-textGray text-sm">Technology • Trending</span>
-                    <Image src="icons/infoMore.svg" alt="info" width={16} height={16} />
+                    {/* <Image path="icons/infoMore.svg" alt="info" width={16} height={16} /> */}
                 </div>
                 <h2 className="text-textGrayLight font-bold">OpenAI</h2>
                 <span className="text-textGray text-sm">20K posts</span>
@@ -47,7 +47,7 @@ const PopularTags = () => {
             <div className="">
                 <div className="flex items-center justify-between">
                     <span className="text-textGray text-sm">Technology • Trending</span>
-                    <Image src="icons/infoMore.svg" alt="info" width={16} height={16} />
+                    {/* <Image path="icons/infoMore.svg" alt="info" width={16} h={16} /> */}
                 </div>
                 <h2 className="text-textGrayLight font-bold">OpenAI</h2>
                 <span className="text-textGray text-sm">20K posts</span>
@@ -56,7 +56,7 @@ const PopularTags = () => {
             <div className="">
                 <div className="flex items-center justify-between">
                     <span className="text-textGray text-sm">Technology • Trending</span>
-                    <Image src="icons/infoMore.svg" alt="info" width={16} height={16} />
+                    {/* <Image path="icons/infoMore.svg" alt="info" width={16} h={16} /> */}
                 </div>
                 <h2 className="text-textGrayLight font-bold">OpenAI</h2>
                 <span className="text-textGray text-sm">20K posts</span>
