@@ -1,3 +1,4 @@
+import Feed from "@/components/Feed";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,7 +8,7 @@ export default function Home() {
       <Link className="pb-3 flex items-center border-b-4 border-iconBlue" href="/">For you</Link>
       <Link className="pb-3 flex  items-center" href="/">Following</Link>
     </div>
-    {/* <Share />
-    <Feed /> */}
+    {/* <Share /> */}
+    <Feed />
   </div>;
 }
