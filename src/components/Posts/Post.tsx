@@ -3,6 +3,7 @@ import PostInfo from "./PostInfo";
 import PostInteractions from "./PostInteractions";
 import Link from "next/link";
 import { Image } from "../Image";
+import Video from "../Video";
 
 interface FileDetailsResponse {
     width: number;
@@ -28,7 +29,7 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
         });
     };
 
-    const fileDetails = await getFileDetails("67a0fa79432c476416917c40");
+    const fileDetails = await getFileDetails("67a11c08432c47641627ac3e");
 
     console.log(fileDetails);
 
@@ -101,7 +102,7 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
                             iure nam voluptas soluta pariatur inventore.
                         </p>
                     </Link>
-                    {
+                    {/* {
                         fileDetails &&
                         <Image
                             path={fileDetails.filePath}
@@ -110,7 +111,24 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
                             height={fileDetails.height}
                             // className={fileDetails.customMetadata?.sensitive ? "blur-lg" : ""}
                         />
-                    }
+                    } */}
+
+                    {fileDetails && fileDetails.fileType === "image" ? (
+                        <Image
+                            path={fileDetails.filePath}
+                            alt=""
+                            width={fileDetails.width}
+                            height={fileDetails.height}
+                            // className={fileDetails.customMetadata?.sensitive ? "blur-lg" : ""}
+                        />
+                    ) : (
+                        <Video
+                            path={fileDetails.filePath}
+                            className={fileDetails.customMetadata?.sensitive ? "blur-lg" : ""}
+                        />
+                    )}
+
+
                     {/* <Image path="general/post.jpeg" alt="" width={600} height={600} /> */}
 
                     {type === "status" && (
