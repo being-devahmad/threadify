@@ -1,7 +1,8 @@
-import Link from "next/link";
-import { Image } from "../Image";
+import { imagekit } from "@/utils";
 import PostInfo from "./PostInfo";
 import PostInteractions from "./PostInteractions";
+import Link from "next/link";
+import { Image } from "../Image";
 
 interface FileDetailsResponse {
     width: number;
@@ -14,9 +15,25 @@ interface FileDetailsResponse {
 
 const Post = async ({ type }: { type?: "status" | "comment" }) => {
 
+    // FETCH POST MEDIA
+
+    const getFileDetails = async (
+        fileId: string
+    ): Promise<FileDetailsResponse> => {
+        return new Promise((resolve, reject) => {
+            imagekit.getFileDetails(fileId, function (error, result) {
+                if (error) reject(error)
+                else resolve(result as FileDetailsResponse)
+            });
+        });
+    };
+
+    const fileDetails = await getFileDetails("67a0fa79432c476416917c40");
+
+    console.log(fileDetails);
+
     return (
         <div className="p-4 border-y-[1px] border-borderGray">
-
             {/* POST TYPE */}
             <div className="flex items-center gap-2 text-sm text-textGray mb-2 from-bold">
                 <svg
@@ -32,7 +49,6 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
                 </svg>
                 <span>Lama Dev reposted</span>
             </div>
-
             {/* POST CONTENT */}
             <div className={`flex gap-4 ${type === "status" && "flex-col"}`}>
                 {/* AVATAR */}
@@ -60,8 +76,8 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
                                 />
                             </div>
                             <div
-                                className={`flex items-center gap-2 flex-wrap 
-                                    ${type === "status" && "flex-col gap-0 !items-start"}`}
+                                className={`flex items-center gap-2 flex-wrap ${type === "status" && "flex-col gap-0 !items-start"
+                                    }`}
                             >
                                 <h1 className="text-md font-bold">Lama Dev</h1>
                                 <span
@@ -74,10 +90,7 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
                                 )}
                             </div>
                         </Link>
-
-                        {/* Side actions icons of post */}
                         <PostInfo />
-
                     </div>
                     {/* TEXT & MEDIA */}
                     <Link href={`/lamaWebDev/status/123`}>
@@ -88,14 +101,21 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
                             iure nam voluptas soluta pariatur inventore.
                         </p>
                     </Link>
-                    <Image path="general/post.jpeg" alt="" width={600} height={600} />
-
-
+                    {
+                        fileDetails &&
+                        <Image
+                            path={fileDetails.filePath}
+                            alt={fileDetails.filePath}
+                            width={fileDetails.width}
+                            height={fileDetails.height}
+                            // className={fileDetails.customMetadata?.sensitive ? "blur-lg" : ""}
+                        />
+                    }
+                    {/* <Image path="general/post.jpeg" alt="" width={600} height={600} /> */}
 
                     {type === "status" && (
                         <span className="text-textGray">8:41 PM · Dec 5, 2024</span>
                     )}
-                    
                     <PostInteractions />
                 </div>
             </div>

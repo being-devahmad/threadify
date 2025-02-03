@@ -31,7 +31,7 @@ export const Image = ({ path, width, height, alt, className, tr }: ImageProps) =
                         width: width,
                         height: height
                     })}
-
+                lqip={{ active: true, quality: 20 }}
                 className={className}
 
             />
