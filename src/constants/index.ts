@@ -52,7 +52,7 @@ export const menuList = [
     {
         id: 9,
         name: "Profile",
-        link: "/profile",
+        link: "/",
         icon: "profile.svg",
     },
     {

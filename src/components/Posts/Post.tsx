@@ -63,7 +63,7 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
                 <div className="flex-1 flex flex-col gap-2">
                     {/* TOP */}
                     <div className="w-full flex justify-between">
-                        <Link href={`/lamaWebDev`} className="flex gap-4">
+                        <Link href={`/profile/lamaWebDev`} className="flex gap-4">
                             <div
                                 className={`${type !== "status" && "hidden"
                                     } relative w-10 h-10 rounded-full overflow-hidden`}
