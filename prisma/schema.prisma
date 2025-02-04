@@ -12,7 +12,6 @@ model User {
   email       String  @unique
   username    String  @unique
   displayName String?
-  name        String?
   bio         String?
   location    String?
   job         String?
@@ -26,7 +25,6 @@ model User {
   saves      SavedPosts[]
   followers  Follow[]     @relation("UserFollowers")
   followings Follow[]     @relation("UserFollowings")
-  Follow     Follow[]
 }
 
 model Post {
@@ -85,6 +83,5 @@ model Follow {
 
   follower  User    @relation("UserFollowers", fields: [followerId], references: [id])
   following User    @relation("UserFollowings", fields: [followingId], references: [id])
-  User      User?   @relation(fields: [userId], references: [id])
   userId    String?
 }

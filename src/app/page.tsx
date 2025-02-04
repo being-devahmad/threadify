@@ -1,8 +1,18 @@
 import Feed from "@/components/Feed";
 import Share from "@/components/Share";
+import { prisma } from "@/utils/prisma";
 import Link from "next/link";
 
 export default function Home() {
+
+  async function main() {
+    const allUsers = await prisma.user.delete({
+      where: {
+        id: "123"
+      }
+    })
+  }
+
   return (
     <>
       <div>

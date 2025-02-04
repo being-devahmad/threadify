@@ -1,9 +1,10 @@
-import { imagekit } from "@/utils";
+
 import PostInfo from "./PostInfo";
 import PostInteractions from "./PostInteractions";
 import Link from "next/link";
 import { Image } from "../Image";
 import Video from "../Video";
+import { imagekit } from "@/utils/imagekit";
 
 interface FileDetailsResponse {
     width: number;
