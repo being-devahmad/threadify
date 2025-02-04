@@ -1,27 +1,50 @@
-import React from 'react'
-import Post from './Posts/Post'
-import { prisma } from '@/utils/prisma'
+import React from "react";
+import Post from "./Posts/Post";
+import { prisma } from "@/utils/prisma";
+import { auth } from "@clerk/nextjs/server";
 
-const Feed = async () => {
+const Feed = async ({ userProfileId }: { userProfileId?: string }) => {
+  const { userId } = await auth();
 
-    // FETCH POSTS 
-    const posts = await prisma.post.findMany()
-    console.log(posts) // FOR DEBUGGING
+  if (!userId) return;
 
+  //   first of all we'll check if user is on homepage or on own profile page, if it is on own profile page then his own posts should be displayed to him otherwise he can see both type of posts, his followings or his own even too.
 
-    return (
-        <div className=''>
-            {
-                posts.map((post) => {
-                    return (
-                        <div key={post.id}>
-                            <Post />
-                        </div>
-                    )
-                })
-            }
-        </div>
-    )
-}
+  const followings = await prisma.follow.findMany({
+    where: { followerId: userId },
+    select: { followingId: true },
+  });
+  const ids = followings.map((f) => f.followingId);
 
-export default Feed
+  console.log("followingsIds--->", ids);
+
+  const userOnProfilePage = userProfileId
+    ? { parentPostId: null, userId: userProfileId }
+    : {
+        parentPostId: null, // means we don't want to fetch any comments
+        userId: {
+          in: [userId, ...followings.map((f) => f.followingId)],
+        },
+      };
+
+  // FETCH POSTS FROM FOLLOWING USERS AND OWN POSTS on feed display
+  const posts = await prisma.post.findMany({
+    where: userOnProfilePage,
+  });
+
+  console.log("posts->", posts);
+
+  return (
+    <div className="">
+      {posts.map((post) => {
+        return (
+          <div key={post.id}>
+            <Post />
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default Feed;
