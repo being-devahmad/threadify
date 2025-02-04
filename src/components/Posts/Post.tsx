@@ -94,7 +94,7 @@ const Post = async ({ type }: { type?: "status" | "comment" }) => {
                         <PostInfo />
                     </div>
                     {/* TEXT & MEDIA */}
-                    <Link href={`/lamaWebDev/status/123`}>
+                    <Link href={`/profile/lamaWebDev/status/123`}>
                         <p className={`${type === "status" && "text-lg"}`}>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum,
                             animi. Laborum commodi aliquam alias molestias odio, ab in,

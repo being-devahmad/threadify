@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String  @id
+  email       String  @unique
+  username    String  @unique
+  displayName String?
+  name        String?
+  bio         String?
+  location    String?
+  job         String?
+  website     String?
+  profilePic  String?
+  coverPic    String?
+
+  // Relations
+  posts      Post[]
+  Like       Like[]
+  saves      SavedPosts[]
+  followers  Follow[]     @relation("UserFollowers")
+  followings Follow[]     @relation("UserFollowings")
+  Follow     Follow[]
+}
+
+model Post {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  description String?  @db.VarChar(255)
+  image       String?
+  video       String?
+  isSensitive Boolean  @default(false)
+
+  // Relations
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  rePostId Int?
+  rePost   Post?  @relation("RePosts", fields: [rePostId], references: [id])
+  rePosts  Post[] @relation("RePosts")
+
+  parentPostId Int?
+  parentPost   Post?        @relation("PostComments", fields: [parentPostId], references: [id])
+  comments     Post[]       @relation("PostComments")
+  Like         Like[]
+  savedPosts   SavedPosts[]
+}
+
+model Like {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  // Relations
+  userId String
+  postId Int
+  user   User   @relation(fields: [userId], references: [id])
+  post   Post   @relation(fields: [postId], references: [id])
+}
+
+model SavedPosts {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  // Relations
+  userId String
+  postId Int
+  user   User   @relation(fields: [userId], references: [id])
+  post   Post   @relation(fields: [postId], references: [id])
+}
+
+model Follow {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  // Relations
+  followerId  String
+  followingId String
+
+  follower  User    @relation("UserFollowers", fields: [followerId], references: [id])
+  following User    @relation("UserFollowings", fields: [followingId], references: [id])
+  User      User?   @relation(fields: [userId], references: [id])
+  userId    String?
+}
