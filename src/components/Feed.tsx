@@ -1,7 +1,10 @@
+// 'use client'
+
 import React from "react";
 import Post from "./Posts/Post";
 import { prisma } from "@/utils/prisma";
 import { auth } from "@clerk/nextjs/server";
+import InfiniteFeed from "./InfiniteFeed";
 
 const Feed = async ({ userProfileId }: { userProfileId?: string }) => {
   const { userId } = await auth();
@@ -14,9 +17,9 @@ const Feed = async ({ userProfileId }: { userProfileId?: string }) => {
     where: { followerId: userId },
     select: { followingId: true },
   });
-  const ids = followings.map((f) => f.followingId);
+  // const ids = followings.map((f) => f.followingId);
 
-  console.log("followingsIds--->", ids);
+  // console.log("followingsIds--->", ids);
 
   const userOnProfilePage = userProfileId
     ? { parentPostId: null, userId: userProfileId }
@@ -30,19 +33,31 @@ const Feed = async ({ userProfileId }: { userProfileId?: string }) => {
   // FETCH POSTS FROM FOLLOWING USERS AND OWN POSTS on feed display
   const posts = await prisma.post.findMany({
     where: userOnProfilePage,
+    include: {
+      user: {
+        select: {
+          displayName: true,
+          username: true,
+          profilePic: true,
+        },
+      },
+    },
+    take: 3,
+    skip: 0,
+    orderBy: { createdAt: "desc" },
   });
-
-  console.log("posts->", posts);
 
   return (
     <div className="">
       {posts.map((post) => {
         return (
           <div key={post.id}>
-            <Post />
+            <Post post={post} />
+            From Server
           </div>
         );
       })}
+      <InfiniteFeed />
     </div>
   );
 };
